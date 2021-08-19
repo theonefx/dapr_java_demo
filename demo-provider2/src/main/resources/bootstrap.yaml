@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: demo-provider2
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      config:
+        enable: true
+        file-extension: yaml
+        server-addr: 127.0.0.1:8848

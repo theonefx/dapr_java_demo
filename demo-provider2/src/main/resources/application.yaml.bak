@@ -1,0 +1,29 @@
+server:
+  port: 8081
+
+management:
+  server:
+    port: 8082
+
+dubbo:
+  cloud:
+    subscribed-services: demo-provider2
+  protocols:
+    dubbo:
+      port: -1
+      name: dubbo
+      id: dubbo
+  registry:
+    address: spring-cloud://localhost
+  consumer:
+    check: false
+  scan:
+    base-packages: com.example.demo.demos.provider2
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        register-enabled: true
+        server-addr: 127.0.0.1:8848
