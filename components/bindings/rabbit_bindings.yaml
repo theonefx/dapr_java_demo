@@ -1,0 +1,11 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: mybinding
+spec:
+  type: bindings.rabbitmq
+  metadata:
+    - name: host
+      value: amqp://localhost:5672
+    - name: queueName
+      value: testQueue
