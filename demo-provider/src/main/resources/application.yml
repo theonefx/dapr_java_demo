@@ -1,9 +1,9 @@
 server:
-  port: 8180
+  port: 8080
 
 management:
   server:
-    port: 8280
+    port: 8081
   endpoints:
     web:
       exposure:
@@ -16,13 +16,3 @@ management:
 spring:
   application:
     name: demo-provider
-  cloud:
-    sentinel:
-      transport:
-        dashboard: localhost:8080
-      eager=true: spring.cloud.sentinel.eager=true
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
-      username: nacos
-      password: nacos

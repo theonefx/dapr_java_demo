@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: provider1-deployment
+  labels:
+    app: provider1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: provider1
+  template:
+    metadata:
+      labels:
+        app: provider1
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "provider1"
+        dapr.io/app-port: "8080"
+        dapr.io/sidecar-readiness-probe-threshold: "30"
+        dapr.io/sidecar-liveness-probe-threshold: "30"
+    spec:
+      containers:
+        - name: provider1
+          image: registry.cn-hangzhou.aliyuncs.com/theonefx/provider1
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /liveness
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 10
