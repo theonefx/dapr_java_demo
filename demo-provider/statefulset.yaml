@@ -1,18 +1,35 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  name: provider1-deployment
+  name: provider1-headless
+  namespace: dapr-tests
   labels:
-    app: provider1
+    app: provider1-headless
 spec:
-  replicas: 1
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: provider1-pod
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: provider1-statefulset
+  namespace: dapr-tests
+spec:
+  serviceName: provider1-headless
+  replicas: 2
   selector:
     matchLabels:
-      app: provider1
+      app: provider1-pod
   template:
     metadata:
       labels:
-        app: provider1
+        app: provider1-pod
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "provider1"

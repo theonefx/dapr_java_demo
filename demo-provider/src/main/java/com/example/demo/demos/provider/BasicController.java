@@ -21,9 +21,9 @@ public class BasicController {
 	@RequestMapping("/readiness")
 	@ResponseBody
 	public String readiness() {
-		if (System.currentTimeMillis() - INT_TIME < TimeUnit.SECONDS.toMillis(10)) {
-			throw new IllegalStateException("app is not ready");
-		}
+//		if (System.currentTimeMillis() - INT_TIME < TimeUnit.SECONDS.toMillis(10)) {
+//			throw new IllegalStateException("app is not ready");
+//		}
 		return "success";
 	}
 
